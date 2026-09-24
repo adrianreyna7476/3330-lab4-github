@@ -7,7 +7,13 @@ $(function() {
   var gameList, newItemForm, newItemButton;
   var item = '';                                 
   
-  
+  var gametitles = [
+    {title: 'The legend of Zelda: Breath of the wild'},
+    {title: 'God of War Ragnarok' },
+    {title: 'Halo Infinite' },
+    {title: 'Minecraft' },
+    {title: 'Super Mario Odyssey' },
+  ];
   gameList = $('ul');                               
   newItemForm = $('#newItemForm');              
   newItemButton = $('#newItemButton');          
@@ -16,6 +22,14 @@ $(function() {
   // To do so, create a function that loops through each object in the game list, 
   // create a new node "list item" holding the game title and 
   // inject the new node inside the <ul>.
+
+function renderTitle(){
+  gameList.empty();
+  gametitles.forEach(function(game){
+    gameList.append(`<li>${game.title}</li>`);
+  });
+}
+renderTitle();
 
 
 
@@ -37,9 +51,10 @@ $(function() {
   newItemForm.submit(function(e) {       
     e.preventDefault();                         
     var text = $('input:text').val();           
-    gameList.append(`<li>${text}</li>`);      
-    $('input:text').val('');                    
-    updateCount();                              
+    gametitles.push({ title:text});
+    renderTitle();
+    $('input:text').val('');
+    updateCount();
   });  
 
 
